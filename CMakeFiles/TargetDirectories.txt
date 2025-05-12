@@ -1,0 +1,3 @@
+C:/Users/dom/Documents/projects/wa/engine/CMakeFiles/MyExecutable.dir
+C:/Users/dom/Documents/projects/wa/engine/CMakeFiles/edit_cache.dir
+C:/Users/dom/Documents/projects/wa/engine/CMakeFiles/rebuild_cache.dir
