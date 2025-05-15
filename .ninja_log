@@ -1,6 +1,6 @@
 # ninja log v6
 19	325	7685075161491339	CMakeFiles/MyExecutable.dir/src/main.cpp.obj	8329d24c428e3711
-33	1354	7687209907313310	CMakeFiles/MyExecutable.dir/src/tests.cpp.obj	f6ed75c5694e95c2
-1354	1689	7687209920522380	MyExecutable.exe	3628c463d4fa18ec
-12	497	7687240407131731	CMakeFiles/MyExecutable.dir/src/tests.cpp.obj	f6ed75c5694e95c2
-498	610	7687240411988948	MyExecutable.exe	3628c463d4fa18ec
+11	638	7690381266755434	CMakeFiles/MyExecutable.dir/src/tests.cpp.obj	f6ed75c5694e95c2
+638	729	7690381273030990	MyExecutable.exe	3628c463d4fa18ec
+9	1782	7690408316581038	CMakeFiles/MyExecutable.dir/src/tests.cpp.obj	f6ed75c5694e95c2
+1783	2033	7690408334317325	MyExecutable.exe	3628c463d4fa18ec

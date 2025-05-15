@@ -112,4 +112,4 @@ struct rectprism {
     }
 };
 
-#endif __GEOMETRY__
+#endif

@@ -1,98 +1,83 @@
-#ifndef __MATRIX__
-#define __MATRIX__
+#ifndef __MATRICES__
+#define __MATRICES__
 
-#include <vector>
-#include <iostream>
-#include <stdexcept>
-#include <typeinfo>
+#include<vector>
+#include"Vectors.h"
+#include<functional>
 
-template <typename T>
-class Matrix {
+using namespace std;
+
+using matrix_t = vector<vector<float>>;
+
+class matrix {
 private:
-    std::vector<std::vector<T>> data; // 2D container for matrix elements
-    size_t rows, cols;                // Dimensions of the matrix
+    matrix_t arr;
 
 public:
-    // Constructor: Initialize matrix with given dimensions and default value
-    Matrix(size_t rows, size_t cols, T defaultValue = T())
-        : rows(rows), cols(cols), data(rows, std::vector<T>(cols, defaultValue)) {}
 
-    // Constructor: Initialize matrix from a 2D array
-    Matrix(const std::vector<std::vector<T>>& inputData)
-        : data(inputData), rows(inputData.size()), cols(inputData.empty() ? 0 : inputData[0].size()) {
-        // Ensure all rows have the same number of columns
-        for (const auto& row : inputData) {
-            if (row.size() != cols) {
-                throw std::invalid_argument("All rows in the 2D array must have the same number of columns");
+    int currentX(){
+        // returns current X length (cols)
+        return this->arr[0].size();
+    }
+
+    int currentY(){
+        // returns current Y length (rows)
+        return this->arr.size();
+    }
+
+    matrix(float number = 0, int xl = 3, int yl = 3): arr(){
+        this->arr = {};
+        for(int y= 0; y< yl; y++){
+            vector<float> xv = {};
+            for(int x = 0; x < xl; x++){xv.push_back(number);}
+            this->arr.push_back(xv);
+        };
+    };
+
+    matrix(matrix_t mat): arr(mat){
+        // we do nothing here
+    };
+
+    // when we define these two other matrices contructors we have to do the tradianol way of assigning
+    // properites beacuse otherwise we would be reassigning props if we do a : var(val) & a this->var=val;
+
+    matrix(Vec3 point, bool four_b = false){
+        this->arr = matrix_t{ {point.x}, {point.y}, {point.z} };
+        if(four_b){
+            this->arr.push_back({0});
+        };
+    };
+
+    matrix(Vec2 point, bool three_b = false){
+        this->arr = matrix_t{ {point.x}, {point.y} };
+        if(three_b){
+            this->arr.push_back({0});
+        };
+    };
+
+    matrix map(function<float(float)> fn){
+        // this function will take a function and apply it to every number in our matrix array
+        // the function we take will take the number (float) and do what ever it wants with it and return another float
+        // the new float will be assinged to the orginal float and be stored in a matrix and returned to the user
+        matrix mat(this->arr);
+        for(int y = 0; y < this->currentY(); y++){
+            for(int x = 0; x < this->currentX(); x++){
+                mat.arr[y][x] = fn(mat.arr[y][x]);
             }
-        }
+        };
+        return mat;
+    };
+
+    float at(int x, int y){
+        return this->arr[y][x];
     }
 
-    // Accessors for dimensions
-    size_t getRows() const { return rows; }
-    size_t getCols() const { return cols; }
-
-    // Access element (read/write)
-    T& at(size_t row, size_t col) {
-        if (row >= rows || col >= cols) {
-            throw std::out_of_range("Matrix index out of range");
-        }
-        return data[row][col];
-    }
-
-    const T& at(size_t row, size_t col) const {
-        if (row >= rows || col >= cols) {
-            throw std::out_of_range("Matrix index out of range");
-        }
-        return data[row][col];
-    }
-
-    // Print the matrix
-    void print() const {
-        for (const auto& row : data) {
-            for (const auto& elem : row) {
-                std::cout << elem << " ";
-            }
-            std::cout << std::endl;
-        }
-    }
-
-    // Matrix addition
-    Matrix<T> operator+(const Matrix<T>& other) const {
-        if (rows != other.rows || cols != other.cols) {
-            throw std::invalid_argument("Matrix dimensions must match for addition");
-        }
-
-        Matrix<T> result(rows, cols);
-        for (size_t i = 0; i < rows; ++i) {
-            for (size_t j = 0; j < cols; ++j) {
-                result.at(i, j) = this->at(i, j) + other.at(i, j);
-            }
-        }
-        return result;
-    }
-
-    // Matrix multiplication
-    Matrix<T> operator*(const Matrix<T>& other) const {
-        if (cols != other.rows) {
-            throw std::invalid_argument("Matrix dimensions do not match for multiplication");
-        }
-
-        Matrix<T> result(rows, other.cols);
-        for (size_t i = 0; i < rows; ++i) {
-            for (size_t j = 0; j < other.cols; ++j) {
-                for (size_t k = 0; k < cols; ++k) {
-                    result.at(i, j) += this->at(i, k) * other.at(k, j);
-                }
-            }
-        }
-        return result;
-    }
-
-    // Get the type of the matrix (e.g., mat4x4, mat3x3)
-    std::string getType() const {
-        return "Matrix<" + std::string(typeid(T).name()) + ">[" + std::to_string(rows) + "x" + std::to_string(cols) + "]";
+    friend std::ostream& operator<<(std::ostream& os, const matrix mat) {
+        os << "{\n";
+        
+        os << "}";
+        return os;
     }
 };
 
-#endif // __MATRIX__
+#endif

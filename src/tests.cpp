@@ -1,6 +1,7 @@
 #include "Vectors.h"
 #include "X3D.h"
 #include "Camera.h"
+#include "Matrix.h"
 #include <iostream>
 
 using namespace std;
@@ -25,11 +26,22 @@ void testProjection() {
     Vec3 sum = pos1 + pos2;
 
     x3d::points3d points = {pos1, pos2, sum};
-    Camera cam = Camera(Vec3(0), Vec3(0), 0, 0);
-    x3d::projectPoints(points, cam);
+    Camera cam = Camera(Vec3(0), Vec3(0), 0.1, 1000, 4/3, 90);
+    // TODO:
+}
+
+void testMatrices() {
+    matrix mat(0);
+    matrix mat2 = mat.map(
+        [](float x){
+            return x + 1;
+        }
+    );
+    cout << mat2.at(0,0);
+    //cout << mat;
 }
 
 int main(){
-    testProjection();
+    testMatrices();
     return 0;
 }

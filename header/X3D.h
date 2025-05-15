@@ -10,10 +10,12 @@
 
 using namespace std;
 
-namespace x3d {
-    
+class x3d {
+public:
     using points2d = vector<Vec2>;
     using points3d = vector<Vec3>;
+    Camera cam;
+    x3d(Camera cam): cam(cam){};
 
     static points3d translatePoints(points3d points, Vec3 to){
         const Vec3 dist(to.invert());
@@ -23,22 +25,13 @@ namespace x3d {
         return points;
     };
 
-    static Matrix<float> projectionMatrix(Camera cam){
-        const float f = (float)1/tan(cam.fov/2);
-        Matrix<float> mat = Matrix<float>({
-            {f/cam.aspect,0,0,0},
-            {0,f,0,0},
-            {0,0,(cam.far+cam.near)/(cam.near-cam.far),2*cam.far*cam.near/(cam.near-cam.far)},
-            {0,0,-1,0},
-        });
-    };
-
-    static points2d projectPoints(points3d points, Camera cam){
-        
+    static points2d projectPoints(points3d points){
+        points2d output({});
         for( Vec3& point : points ){
-            cout << point << endl;
+            // do somthing
         };
-    }
-}
+        return points2d();
+    };
+};
 
-#endif __X3D__
+#endif
