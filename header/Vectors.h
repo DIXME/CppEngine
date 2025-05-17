@@ -1,6 +1,7 @@
 #ifndef __VECTORS__
 #define __VECTORS__
 #include <iostream>
+
 class Vec3 {
 public:
     float x, y, z;
@@ -9,28 +10,32 @@ public:
     Vec3(float x): x(x), y(x), z(x){};
     Vec3(): x(0), y(0), z(0){};
 
-    void operator+=(const Vec3& o) const {
+    Vec3& operator+=(const Vec3& o) {
         this->x+o.x;
         this->y+o.y;
         this->z+o.z;
+        return *this;
     }
     
-    void operator-=(const Vec3& o) const {
+    Vec3& operator-=(const Vec3& o) {
         this->x-o.x;
         this->y-o.y;
         this->z-o.z;
+        return *this;
     }
     
-    void operator/=(const Vec3& o) const {
+    Vec3& operator/=(const Vec3& o) {
         this->x/o.x;
         this->y/o.y;
         this->z/o.z;
+        return *this;
     }
 
-    void operator*=(const Vec3& o) const {
+    Vec3& operator*=(const Vec3& o) {
         this->x*o.x;
         this->y*o.y;
         this->z*o.z;
+        return *this;
     }
 
     Vec3 operator+(const Vec3& o) const {
@@ -57,8 +62,8 @@ public:
         );
     }
 
-    Vec3* operator*(const Vec3& o) const {
-        return new Vec3(
+    Vec3 operator*(const Vec3& o) const {
+        return Vec3(
             this->x*o.x,
             this->y*o.y,
             this->z*o.z
@@ -87,24 +92,28 @@ public:
     Vec2(float x): x(x), y(x){};
     Vec2(): x(0), y(0){};
 
-    void operator+=(const Vec2& o) const {
+    Vec2& operator+=(const Vec2& o) {
         this->x+o.x;
         this->y+o.y;
+        return *this;
     }
     
-    void operator-=(const Vec2& o) const {
+    Vec2& operator-=(const Vec2& o)  {
         this->x-o.x;
         this->y-o.y;
+        return *this;
     }
     
-    void operator/=(const Vec2& o) const {
+    Vec2& operator/=(const Vec2& o) {
         this->x/o.x;
         this->y/o.y;
+        return *this;
     }
 
-    void operator*=(const Vec2& o) const {
+    Vec2& operator*=(const Vec2& o) {
         this->x*o.x;
         this->y*o.y;
+        return *this;
     }
 
     Vec2 operator+(const Vec2& o) const {
