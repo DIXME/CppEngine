@@ -4,10 +4,10 @@
 #include<vector>
 #include"Vectors.h"
 #include<functional>
+#include"Types.h"
 
 using namespace std;
-
-using matrix_t = vector<vector<float>>;
+using namespace types;
 
 class matrix {
 private:
@@ -28,7 +28,7 @@ public:
     matrix(float number = 0, int xl = 3, int yl = 3): arr(){
         this->arr = {};
         for(int y= 0; y< yl; y++){
-            vector<float> xv = {};
+            row xv = {};
             for(int x = 0; x < xl; x++){xv.push_back((float)number);};
             this->arr.push_back(xv);
         };
@@ -68,7 +68,7 @@ public:
         return mat;
     };
 
-    matrix mapY(function<vector<float>(vector<float>&, int)> fn){
+    matrix mapY(function<row(row&, int)> fn){
         // this function will take a function and apply it to every number in our matrix array
         // the function we take will take the number (float) and do what ever it wants with it and return another float
         // the new float will be assinged to the orginal float and be stored in a matrix and returned to the user
@@ -79,7 +79,7 @@ public:
         return mat;
     };
 
-    void forEachY(function<void(vector<float>, int)> fn){
+    void forEachY(function<void(row, int)> fn){
         // this function will loop thru all of the numbers (floats) in the matrix array and give the function the number
         // this function will not return a value it will just do whatever it wants with it
         // the map function will allow you to do this but change the value!
@@ -134,7 +134,7 @@ public:
             );
         }
 
-        matrix_t result(a_rows, vector<float>(b_cols, 0.0f));
+        matrix_t result(a_rows, row(b_cols, 0.0f));
 
         for (int y = 0; y < a_rows; ++y) {
             for (int x = 0; x < b_cols; ++x) {
@@ -149,6 +149,16 @@ public:
         }
 
         return matrix(result);
+    }
+
+    matrix operator^(float scalar) const {
+        matrix result(this->arr);
+        result=result.mapX(
+            [&scalar](float value, int x, int y){
+                return value*scalar;
+            }
+        );
+        return result;
     }
 };
 

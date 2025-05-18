@@ -10,13 +10,13 @@
 #include"util.h"
 #include"x3dMath.h"
 #include"Math.h"
+#include"Types.h"
 
 using namespace std;
+using namespace types;
 
 class x3d {
 public:
-    using points2d = vector<Vec2>;
-    using points3d = vector<Vec3>;
     Camera cam;
     matrix projectionMatrix;
     x3d(Camera cam): cam(cam), projectionMatrix(cam.projectionMatrix(cam)){};

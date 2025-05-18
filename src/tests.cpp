@@ -1,10 +1,12 @@
-#include "Vectors.h"
-#include "X3D.h"
-#include "Camera.h"
-#include "Matrix.h"
-#include <iostream>
+#include"Vectors.h"
+#include"X3D.h"
+#include"Camera.h"
+#include"Matrix.h"
+#include"Types.h"
+#include<iostream>
 
 using namespace std;
+using namespace types;
 
 // so this file will just be unit test mabey i will make thhem into seprate files if this gets verry large
 // i used to know steerling but idksteerling anymore❗❗‼️‼️🗣️🗣️🌹🌹🥀🥀🥀💔💔❓❓
@@ -63,8 +65,8 @@ void testProjection(){
     Vec3 point3(3);
     Camera cam(point1, point2, 0.1,1000,4/3,90);
     x3d d3(cam);
-    x3d::points3d points({point1, point2, point3});
-    x3d::points2d npoints = d3.projectPoints(points);
+    points3d points({point1, point2, point3});
+    points2d npoints = d3.projectPoints(points);
     for( Vec2& point : npoints){
         cout << point << endl;
     }
@@ -76,7 +78,13 @@ void atRefTest(){
     cout << mat;
 }
 
+void matrixDotTest(){
+    matrix mat(2);
+    mat=mat^2;
+    cout << mat;
+}
+
 int main(){
-    atRefTest();
+    matrixDotTest();
     return 0;
 }
