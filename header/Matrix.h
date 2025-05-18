@@ -99,7 +99,7 @@ public:
         };
     };
 
-    float at(int x, int y) const {
+    float& at(int x, int y) {
         return this->arr[y][x];
     };
 

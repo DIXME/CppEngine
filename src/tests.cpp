@@ -70,7 +70,13 @@ void testProjection(){
     }
 }
 
+void atRefTest(){
+    matrix mat(0);
+    mat.at(1,1) = 5;
+    cout << mat;
+}
+
 int main(){
-    testProjection();
+    atRefTest();
     return 0;
 }

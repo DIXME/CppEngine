@@ -6,8 +6,10 @@
 #include"Matrix.h"
 #include<iostream>
 #include<vector>
-#include "Camera.h"
+#include"Camera.h"
 #include"util.h"
+#include"x3dMath.h"
+#include"Math.h"
 
 using namespace std;
 
@@ -66,6 +68,7 @@ public:
     }
 
     matrix rotate3dXYZ(Vec3 rot, Vec3 pos) const {
+        // rotate one point
         matrix mat(pos);
         if(rot.z != 0){
             mat = rotationMatrix3dZ(rot.z) * mat;
@@ -81,6 +84,8 @@ public:
 
     points3d rotatePoints(Vec3 rot, points3d points){
         // FIX: this dose not account for zeros so this can be optimizzed
+        // this dose not use any other functions beacuse this is ment for multiable rotations
+        // beacuse it only creates 3 matrices and dose not recreate them (it would if it where to use rotate3dXYZ)
         matrix z = rotationMatrix3dZ(rot.z);
         matrix y = rotationMatrix3dY(rot.y);
         matrix x = rotationMatrix3dX(rot.x);
