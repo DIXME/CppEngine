@@ -1,19 +1,17 @@
-#ifndef __X3D__
-#define __X3D__
+#pragma once
 
-#include"Vectors.h"
-#include"variant"
-#include"Matrix.h"
+#include<Vectors.h>
+#include<variant>
+#include<Matrix.h>
 #include<iostream>
 #include<vector>
-#include"Camera.h"
-#include"util.h"
-#include"x3dMath.h"
-#include"Math.h"
-#include"Types.h"
+#include<Camera.h>
+#include<util.h>
+#include<x3dMath.h>
+#include<Types.h>
 
 using namespace std;
-using namespace types;
+using namespace xTypes;
 
 class x3d {
 public:
@@ -86,18 +84,17 @@ public:
         // FIX: this dose not account for zeros so this can be optimizzed
         // this dose not use any other functions beacuse this is ment for multiable rotations
         // beacuse it only creates 3 matrices and dose not recreate them (it would if it where to use rotate3dXYZ)
+        if(rot==Vec3(0)) return points;
         matrix z = rotationMatrix3dZ(rot.z);
         matrix y = rotationMatrix3dY(rot.y);
         matrix x = rotationMatrix3dX(rot.x);
         for( Vec3& point: points ){
             matrix mat(point);
-            mat = z * mat;
-            mat = y * mat;
-            mat = x * mat;
+            if(rot.z!=0) mat = z * mat;
+            if(rot.y!=0) mat = y * mat;
+            if(rot.x!=0) mat = x * mat;
             point = utl::Vec3FromMt(mat);
         }
         return points;
     }
 };
-
-#endif

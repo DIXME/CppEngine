@@ -1,5 +1,4 @@
-#ifndef  __GRAPHICS__
-#define __GRAPHICS__
+#pragma once
 
 #include"X3D.h"
 #include"Vectors.h"
@@ -11,5 +10,3 @@ class Graphics {
     Camera cam;
     x3d x;
 };
-
-#endif

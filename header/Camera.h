@@ -1,10 +1,12 @@
-#ifndef __CAMERA__
-#define __CAMERA__
+#pragma once
 
 #include"Vectors.h"
 #include"Matrix.h"
 #include"math.h"
 #include"x3dMath.h"
+#include"Types.h"
+
+using namespace xTypes;
 
 class Camera {
 public:
@@ -33,5 +35,3 @@ public:
         });
     };
 };
-
-#endif

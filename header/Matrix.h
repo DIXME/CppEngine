@@ -1,5 +1,4 @@
-#ifndef __MATRICES__
-#define __MATRICES__
+#pragma once
 
 #include<vector>
 #include"Vectors.h"
@@ -7,7 +6,7 @@
 #include"Types.h"
 
 using namespace std;
-using namespace types;
+using namespace xTypes;
 
 class matrix {
 private:
@@ -39,14 +38,9 @@ public:
     // when we define these two other matrices contructors we have to do the tradianol way of assigning
     // properites beacuse otherwise we would be reassigning props if we do a : var(val) & a this->var=val;
 
-    matrix(const Vec3& point, bool four_b = false){
-        // DEBUG: cout << "the point-> " << point << endl;
-        this->arr = matrix_t{ {(float)point.x}, {(float)point.y}, {(float)point.z} };
-        // DEBUG: cout << "the point in the new matrix->"  << *this << endl;
-        if(four_b){
-            this->arr.push_back({0});
-        };
-    };
+    matrix(const Vec3& point, bool four_b = false) : 
+    arr(four_b ? matrix_t{{ {(float)point.x}, {(float)point.y}, {(float)point.z}, {0.0}}} :
+                 matrix_t{ {(float)point.x}, {(float)point.y}, {(float)point.z} }){};
 
     matrix(const Vec2& point, bool three_b = false){
         this->arr = matrix_t{ {point.x}, {point.y} };
@@ -161,5 +155,3 @@ public:
         return result;
     }
 };
-
-#endif

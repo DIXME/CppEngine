@@ -1,5 +1,5 @@
-#ifndef __VECTORS__
-#define __VECTORS__
+#pragma once
+
 #include <iostream>
 
 class Vec3 {
@@ -69,6 +69,10 @@ public:
             this->z*o.z
         );
     }
+
+    bool operator==(Vec3 other) const {
+        return this->x == other.x && this->y == other.y && this->z == other.z;
+    };
 
     Vec3 invert(){
         return Vec3(
@@ -149,5 +153,3 @@ public:
         return os;
     }
 };
-
-#endif

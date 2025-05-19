@@ -1,5 +1,4 @@
-#ifndef  __X3DMATH__
-#define __X3DMATH__
+#pragma once
 
 #include"Constants.h"
 
@@ -14,5 +13,3 @@ namespace Math {
         return deg * Constants::pi / 180;
     }
 }
-
-#endif

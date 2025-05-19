@@ -1,5 +1,4 @@
-#ifndef __UTIL__
-#define __UTIL__
+#pragma once
 
 #include"Vectors.h"
 #include"Matrix.h"
@@ -13,5 +12,3 @@ namespace utl {
         return Vec2(mat.at(0,0), mat.at(0,1));
     };
 };
-
-#endif
