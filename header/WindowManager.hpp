@@ -24,7 +24,7 @@ public:
 
     int init(){
         if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-            std::cout<<"no video"<<endl;
+            std::cout<<"no video\n";
             return 1;
         }
     
@@ -37,30 +37,30 @@ public:
             SDL_WINDOW_SHOWN
         );
 
-        std::cout<<"window made mabey"<<endl;
+        std::cout<<"window made mabey\n";
 
         if (window == nullptr) {
             // Handle window creation error
-            std::cout<<"window never existed"<<endl;
+            std::cout<<"window never existed\n";
             SDL_Quit();
             return 1;
         }
 
         // tell sdl where to put the event data;
-        std::cout<<"polling event (window is made)"<<endl;
+        std::cout<<"polling event (window is made)\n";
         SDL_PollEvent(&this->event);
         return 0;
     }
 
     bool running(){
         if(this->event.type == SDL_QUIT){
-            std::cout<<"window died"<<endl;
+            std::cout<<"window died\n";
         }
         return this->event.type != SDL_QUIT;
     }
 
     void kill(){
-        std::cout<<"window KILLED"<<endl;
+        std::cout<<"window KILLED\n";
         SDL_DestroyWindow(window);
         SDL_Quit();
     }

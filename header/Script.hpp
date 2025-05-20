@@ -1,6 +1,6 @@
 #pragma once
 
-#include<Component.h>
+#include<Component.hpp>
 #include<functional>
 
 class ScriptComponent : Component {

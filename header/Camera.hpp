@@ -1,11 +1,11 @@
 #pragma once
 
-#include<Vectors.h>
-#include<Matrix.h>
-#include<math.h>
-#include<x3dMath.h>
-#include<Types.h>
-#include<Component.h>
+#include<Vectors.hpp>
+#include<Matrix.hpp>
+#include<x3dMath.hpp>
+#include<x3dMath.hpp>
+#include<Types.hpp>
+#include<Component.hpp>
 
 using namespace xTypes;
 

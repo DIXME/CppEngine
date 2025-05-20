@@ -1,14 +1,14 @@
 #pragma once
 
-#include<Vectors.h>
+#include<Vectors.hpp>
 #include<variant>
-#include<Matrix.h>
+#include<Matrix.hpp>
 #include<iostream>
 #include<vector>
-#include<Camera.h>
-#include<util.h>
-#include<x3dMath.h>
-#include<Types.h>
+#include<Camera.hpp>
+#include<util.hpp>
+#include<x3dMath.hpp>
+#include<Types.hpp>
 
 using namespace std;
 using namespace xTypes;

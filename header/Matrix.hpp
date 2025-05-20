@@ -1,9 +1,9 @@
 #pragma once
 
 #include<vector>
-#include"Vectors.h"
+#include"Vectors.hpp"
 #include<functional>
-#include"Types.h"
+#include"Types.hpp"
 
 using namespace std;
 using namespace xTypes;

@@ -1,9 +1,9 @@
 #pragma once
 
-#include<WindowManager.h>
+#include<WindowManager.hpp>
 #include<functional>
 #include<iostream>
-#include<Component.h>
+#include<Component.hpp>
 
 struct KeyBind {
 public:

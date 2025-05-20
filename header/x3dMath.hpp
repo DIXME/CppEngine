@@ -1,6 +1,6 @@
 #pragma once
 
-#include"Constants.h"
+#include"Constants.hpp"
 
 namespace Math {
     static float radToDeg(float rad){

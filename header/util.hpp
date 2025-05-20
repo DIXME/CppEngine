@@ -1,7 +1,7 @@
 #pragma once
 
-#include"Vectors.h"
-#include"Matrix.h"
+#include<Vectors.hpp>
+#include<Matrix.hpp>
 
 namespace utl {
     Vec3 Vec3FromMt(matrix mat){
