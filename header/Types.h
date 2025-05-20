@@ -4,7 +4,9 @@
 #include"Vectors.h"
 #include<functional>
 #include<iostream>
-#include<Keyboard.h>
+
+// FIX: keyboard & types not working together no idea why
+// why is this throwing an error with keyboard
 
 namespace xTypes {
     using points2d = std::vector<Vec2>;
@@ -13,8 +15,4 @@ namespace xTypes {
     using row = std::vector<float>;
     using col = std::vector<row>;
     using matrix_t = std::vector<std::vector<float>>;
-
-    // for things like callbacks
-    using voidFn = std::function<void()>;
-    using keyBinds = std::vector<key>;
 };

@@ -1,31 +1,38 @@
 #pragma once
 
-#include<GLFW/glfw3.h>
 #include<WindowManager.h>
 #include<functional>
 #include<iostream>
-#include<Types.h>
-#include<vector>
+#include<Component.h>
 
-class key {
+struct KeyBind {
 public:
-    std::string name;
-    xTypes::voidFn fnW; // while down
-    xTypes::voidFn fnO; // on key down
-    xTypes::voidFn fnR; // when realsed
+    int value;
+    std::function<void()> fnW; // while down
+    std::function<void()> fnO; // on key down
+    std::function<void()> fnR; // when realsed
     bool down;
     bool recent;
 };
 
-class Keyboard {
+class Keyboard : Component {
     // manges keyboard stuff
     // from the window manager
     // is game object!
     WindowManager wm;
-    xTypes::keyBinds keys;
+    std::vector<KeyBind> keys;
 
     void tick(){
-        for(key& k : this->keys){
+        for(KeyBind& k : this->keys){
+            // FIX: key presses with sdl2
+            bool down = false;
+            
+            if(down && !k.down){ k.down = true; k.recent = true; };
+            if(!down && k.down){ k.down = false; k.recent = true; };
+
+            // we dont need to reset recent beacuse the statements below
+            // already do this
+
             if(k.down && k.recent){
                 // on down
                 k.fnO();

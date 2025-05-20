@@ -15,6 +15,8 @@ using namespace xTypes;
 
 class x3d {
 public:
+    // everything 3d math wise in one class
+    // you should craete an instance if rendering!
     Camera cam;
     matrix projectionMatrix;
     x3d(Camera cam): cam(cam), projectionMatrix(cam.projectionMatrix(cam)){};

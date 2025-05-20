@@ -1,10 +1,12 @@
+#define SDL_MAIN_HANDLED
+
 #include"Vectors.h"
 #include"X3D.h"
 #include"Camera.h"
 #include"Matrix.h"
 #include"Types.h"
 #include<iostream>
-#include<GLFW/glfw3.h>
+#include<WindowManager.h>
 
 using namespace std;
 using namespace xTypes;
@@ -85,45 +87,15 @@ void matrixDotTest(){
     cout << mat;
 }
 
-int testGLFW(){
-        // Initialize GLFW
-    if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW\n";
-        return -1;
+int testWm(){
+    WindowManager wm("Hello World");
+    wm.init();
+    while(wm.running()){
+        
     }
-
-    // Create a windowed mode window and its OpenGL context
-    GLFWwindow* window = glfwCreateWindow(640, 480, "Hello GLFW", nullptr, nullptr);
-    if (!window) {
-        std::cerr << "Failed to create GLFW window\n";
-        glfwTerminate();
-        return -1;
-    }
-
-    // Make the window's context current
-    glfwMakeContextCurrent(window);
-
-    // Main loop
-    while (!glfwWindowShouldClose(window)) {
-        // Set the clear color (RGBA)
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        // Draw here (OpenGL calls go here)
-
-        // Swap front and back buffers
-        glfwSwapBuffers(window);
-
-        // Poll for and process events
-        glfwPollEvents();
-    }
-
-    // Cleanup
-    glfwDestroyWindow(window);
-    glfwTerminate();
     return 0;
-};
+}
 
 int main(){
-    return testGLFW();
+    return testWm();
 }

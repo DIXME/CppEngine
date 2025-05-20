@@ -1,14 +1,15 @@
 #pragma once
 
-#include"Vectors.h"
-#include"Matrix.h"
-#include"math.h"
-#include"x3dMath.h"
-#include"Types.h"
+#include<Vectors.h>
+#include<Matrix.h>
+#include<math.h>
+#include<x3dMath.h>
+#include<Types.h>
+#include<Component.h>
 
 using namespace xTypes;
 
-class Camera {
+class Camera : Component {
 public:
     Vec3 pos, rot, vel, rotVel;
     float near, far, aspect, fovRad, fovDeg;
