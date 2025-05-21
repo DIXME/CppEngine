@@ -4,6 +4,10 @@
 #include<iostream>
 #include<SDL2/SDL.h>
 
+// FIX: i was having problems with sdl2 & i used multiable chatgipity prompts to
+// try to fix it to zero avail so i just tried to fix it myself and it was quite simple
+// tbh so i need to clean this up a little bit
+
 class WindowManager {
     // Creates & manages a sdl2 instance type shit   
 public: 

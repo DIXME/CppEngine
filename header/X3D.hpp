@@ -99,4 +99,20 @@ public:
         }
         return points;
     }
+
+    Vec2 rotate2(Vec2 point, float rot){
+        matrix mat = matrix_t{
+            {cos(rot),-sin(rot)},
+            {sin(rot), cos(rot)}
+        };
+        matrix pmt(point);
+        return utl::Vec2FromMt(pmt*mat);
+    }
+    
+    points2d rotatePoints2(points2d points, float rot){
+        for( Vec2 point : points ){
+            point = this->rotate2(point, rot);
+        }
+        return points;
+    }
 };

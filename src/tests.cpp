@@ -9,6 +9,7 @@
 #include<iostream>
 #include<WindowManager.hpp>
 #include<Graphics.hpp>
+#include<Rects.hpp>
 
 using namespace std;
 using namespace xTypes;
@@ -90,18 +91,29 @@ void matrixDotTest(){
 }
 
 int testWm(){
-    WindowManager wm("Hello World");
+    WindowManager wm("Hello World",1000,750);
+
     if(wm.init() != 0) {
         return -1;  // Exit if initialization fails
     }
+
     Camera cam(Vec3(0), Vec3(0),0.1,1000,4/3,90,true);
     x3d math(cam);
     Graphics g(wm,cam,math);
+    Color coolColor1(100,50,100);
+    Color coolColor2(50,25,30);
+    Rect2Component rect(Vec2(0), Vec2(50), coolColor1);
 
-    while(wm.isRunning()) {  // Keep running until window should close
+    while(wm.isRunning()) {
         wm.clear();
-        g.line(Vec2(50,50), Vec2(50,150));
-        wm.loop();        // Update the screen
+        g.setColor(0, 125, 0);
+        g.drawDebug();
+
+        rect.tick(g, math);
+
+
+        
+        wm.loop();
         SDL_Delay(16);    // Cap to ~60 FPS
     }
 

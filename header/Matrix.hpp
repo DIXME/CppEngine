@@ -42,12 +42,9 @@ public:
     arr(four_b ? matrix_t{{ {(float)point.x}, {(float)point.y}, {(float)point.z}, {0.0}}} :
                  matrix_t{ {(float)point.x}, {(float)point.y}, {(float)point.z} }){};
 
-    matrix(const Vec2& point, bool three_b = false){
-        this->arr = matrix_t{ {point.x}, {point.y} };
-        if(three_b){
-            this->arr.push_back({0});
-        };
-    };
+    matrix(const Vec2& point, bool four_b = false) : 
+    arr(matrix_t{{ {(float)point.x}, {(float)point.y}}}){};
+
 
     matrix mapX(function<float(float, int, int)> fn){
         // this function will take a function and apply it to every number in our matrix array
