@@ -1,12 +1,14 @@
 #define SDL_MAIN_HANDLED
 
-#include"Vectors.h"
-#include"X3D.h"
-#include"Camera.h"
-#include"Matrix.h"
-#include"Types.h"
+#include<SDL2/SDL.h>
+#include<Vectors.hpp>
+#include<X3D.hpp>
+#include<Camera.hpp>
+#include<Matrix.hpp>
+#include<Types.hpp>
 #include<iostream>
-#include<WindowManager.h>
+#include<WindowManager.hpp>
+#include<Graphics.hpp>
 
 using namespace std;
 using namespace xTypes;
@@ -70,7 +72,7 @@ void testProjection(){
     x3d d3(cam);
     points3d points({point1, point2, point3});
     points2d npoints = d3.projectPoints(points);
-    for( Vec2& point : npoints){
+    for( Vec2& point : npoints ){
         cout << point << endl;
     }
 }
@@ -89,11 +91,28 @@ void matrixDotTest(){
 
 int testWm(){
     WindowManager wm("Hello World");
-    wm.init();
-    while(wm.running()){
-        
+    if(wm.init() != 0) {
+        return -1;  // Exit if initialization fails
     }
+    Camera cam(Vec3(0), Vec3(0),0.1,1000,4/3,90,true);
+    x3d math(cam);
+    Graphics g(wm,cam,math);
+
+    while(wm.isRunning()) {  // Keep running until window should close
+        wm.loop();        // Update the screen
+        SDL_Delay(16);    // Cap to ~60 FPS
+    }
+
     return 0;
+}
+
+void sdlVersion(){
+    SDL_version compiled;
+    SDL_VERSION(&compiled);
+    std::cout << "SDL compiled version: "
+              << (int)compiled.major << "."
+              << (int)compiled.minor << "."
+              << (int)compiled.patch << std::endl;
 }
 
 int main(){

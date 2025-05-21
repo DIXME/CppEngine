@@ -6,6 +6,7 @@
 #include<x3dMath.hpp>
 #include<Types.hpp>
 #include<Component.hpp>
+#include<math.h>
 
 using namespace xTypes;
 
@@ -24,6 +25,18 @@ public:
     aspect(aspect),
     fovDeg(isDeg ? fov : Math::radToDeg(fov)),
     fovRad(isDeg ? Math::degToRad(fov) : fov)
+    {};
+    
+    Camera(bool isDeg = true):
+    pos(Vec3(0)),
+    rot(Vec3(0)),
+    vel(Vec3(0)),
+    rotVel(Vec3(0)),
+    near(0),
+    far(0),
+    aspect(4/3),
+    fovDeg(isDeg ? 90 : Math::radToDeg(90)),
+    fovRad(isDeg ? Math::degToRad(90) : 90)
     {};
     
     static matrix projectionMatrix(Camera cam){

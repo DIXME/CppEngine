@@ -103,7 +103,7 @@ struct rectprism {
     rectprism(Vec3 position, Vec3 whv) : position(position), whv(whv){};
 
     points3d verts(){
-        return {
+        return points3d{
             // back
 
             Vec3(
@@ -153,23 +153,21 @@ struct rectprism {
     }
 
     vector<rect2> faces(){
-        const points3d v = this->verts();
-        const Vec3 
-            // back
-            bottomLeftBack,
-            topLeftBack,
-            topRightBack,
-            bottomRightBack,
-            // front
-            bottomLeftFront,
-            topLeftFront,
-            topRightFront,
-            bottomRightFront
-            =
-            v[0],v[1],v[2],v[3],
-            v[4],v[5],v[6],v[7];
-        // to do we need to project them first
-        return {
+        const points3d verts_ = this->verts();
+        
+        // back face vertices
+        const Vec3 bottomLeftBack = verts_[0];
+        const Vec3 topLeftBack = verts_[1];
+        const Vec3 topRightBack = verts_[2];
+        const Vec3 bottomRightBack = verts_[3];
+        
+        // front face vertices
+        const Vec3 bottomLeftFront = verts_[4];
+        const Vec3 topLeftFront = verts_[5];
+        const Vec3 topRightFront = verts_[6];
+        const Vec3 bottomRightFront = verts_[7];
+
+        return vector<rect2>{
 
         };
     }

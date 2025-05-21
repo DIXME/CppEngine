@@ -1,7 +1,7 @@
 #pragma once
+
 #define SDL_MAIN_HANDLED
 #include<iostream>
-#include<string>
 #include<SDL2/SDL.h>
 
 class WindowManager {
@@ -9,59 +9,89 @@ class WindowManager {
 public: 
     std::string title;
     int w, h;
+    bool running;
 
     SDL_Window* window;
     SDL_Event event;
+    SDL_Renderer* renderer;
 
     WindowManager(std::string title, int w = 500, int h = 500):
-    title(title),w(w), h(h){
-        this->event = SDL_Event();
+        title(title), w(w), h(h), running(true), window(nullptr), renderer(nullptr) {
     }
 
-    ~WindowManager(){
+    ~WindowManager() {
+        std::cout << "WM CLASS DECONSTRUCTOR CALLED BY SOMTHING" << endl;
         this->kill();
     }
 
-    int init(){
+    int init() {
+        std::cout << "init: SDL_Init\n";
         if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-            std::cout<<"no video\n";
-            return 1;
+            std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
+            return -1;
         }
-    
-        this->window = SDL_CreateWindow(
-            this->title.c_str(),
-            SDL_WINDOWPOS_CENTERED,
-            SDL_WINDOWPOS_CENTERED,
-            this->w,
-            this->h,
+        std::cout << "init: SDL_CreateWindow\n";
+        window = SDL_CreateWindow(
+            title.c_str(),
+            SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+            w, h,
             SDL_WINDOW_SHOWN
         );
 
-        std::cout<<"window made mabey\n";
-
-        if (window == nullptr) {
-            // Handle window creation error
-            std::cout<<"window never existed\n";
-            SDL_Quit();
-            return 1;
+        if (!window) {
+            std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
+            return -1;
         }
-
-        // tell sdl where to put the event data;
-        std::cout<<"polling event (window is made)\n";
-        SDL_PollEvent(&this->event);
+        std::cout << "init: rendererSetup\n";
+        if (rendererSetup() != 1) {
+            return -1;
+        }
+        std::cout << "init: success\n";
+        running = true;
         return 0;
     }
 
-    bool running(){
-        if(this->event.type == SDL_QUIT){
-            std::cout<<"window died\n";
-        }
-        return this->event.type != SDL_QUIT;
+    int rendererSetup(){
+        this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
+        if (!renderer) {
+            std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << "\n";
+            this->kill();
+            return -1;
+        };
+        return 1;
     }
 
-    void kill(){
-        std::cout<<"window KILLED\n";
-        SDL_DestroyWindow(window);
-        SDL_Quit();
+    void pollEvents() {
+        while(SDL_PollEvent(&this->event)) {
+            switch(this->event.type) {
+                case SDL_QUIT:
+                    running = false;
+                    break;
+            }
+        }
+    }
+
+    bool isRunning() {
+        pollEvents();
+        return running;
+    }
+
+    void loop() {
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+        SDL_RenderPresent(renderer);
+    }
+
+    void kill() {
+        if (renderer) {
+            SDL_DestroyRenderer(renderer);
+            renderer = nullptr;
+        }
+        if (window) {
+            SDL_DestroyWindow(window);
+            window = nullptr;
+            SDL_Quit();
+            std::cout << "window KILLED\n";
+        }
     }
 };
