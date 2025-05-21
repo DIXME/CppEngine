@@ -76,9 +76,12 @@ public:
         return running;
     }
 
-    void loop() {
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    void clear(){
+        SDL_SetRenderDrawColor(renderer, 200, 150, 32, 255);
         SDL_RenderClear(renderer);
+    }
+
+    void loop() {
         SDL_RenderPresent(renderer);
     }
 

@@ -99,6 +99,8 @@ int testWm(){
     Graphics g(wm,cam,math);
 
     while(wm.isRunning()) {  // Keep running until window should close
+        wm.clear();
+        g.line(Vec2(50,50), Vec2(50,150));
         wm.loop();        // Update the screen
         SDL_Delay(16);    // Cap to ~60 FPS
     }
