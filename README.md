@@ -12,3 +12,8 @@ i just put them all here beacuse i want to see the evelotion of everything
 # about how the engine fundemently functions
 the classes will be able to be created and used individualy however they can also function under the game engine instance
 that will manage all of them so they can interact more efficently
+
+# im verry new to c++
+i am but i really like the launge everytime i learn more i like it even more then i did before
+but this dose brings some draw backs beacuse i was wrrting deffs in hpp files witch is NOT good
+so i have to rewrite hpp files & make src files now

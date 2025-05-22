@@ -57,6 +57,9 @@
         "xhash": "cpp",
         "optional": "cpp",
         "algorithm": "cpp",
-        "string": "cpp"
-    }
+        "string": "cpp",
+        "*.rh": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.default.compilerPath": "C:/MinGW/bin/g++.exe"
 }

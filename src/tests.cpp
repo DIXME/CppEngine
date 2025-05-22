@@ -1,18 +1,9 @@
 #define SDL_MAIN_HANDLED
 
 #include<SDL2/SDL.h>
-#include<Vectors.hpp>
-#include<X3D.hpp>
-#include<Camera.hpp>
-#include<Matrix.hpp>
-#include<Types.hpp>
-#include<iostream>
-#include<WindowManager.hpp>
-#include<Graphics.hpp>
-#include<Rects.hpp>
+#include<Engine.hpp>
 
 using namespace std;
-using namespace xTypes;
 
 // so this file will just be unit test mabey i will make thhem into seprate files if this gets verry large
 // i used to know steerling but idksteerling anymore❗❗‼️‼️🗣️🗣️🌹🌹🥀🥀🥀💔💔❓❓
@@ -34,7 +25,7 @@ void testVectors() {
 void testMatrices() {
     Vec3 point(2);
     matrix mat(3);
-    matrix matFromPoint(point);
+    matrix matFromPoint(point,false);
     matrix mat4x1FromPoint(point, true);
     cout << mat << endl;
     matrix mat2 = mat.mapX(
@@ -60,7 +51,7 @@ void testMatrices() {
 void testMatrixOparations(){
     matrix mat1((float)3);
     Vec3 point(2,2,2);
-    matrix mat2(point);
+    matrix mat2(point,false);
     matrix product = mat1 * mat2;
     cout << mat1  << " *  " << endl  << mat2 << endl << product << endl;  
 };
@@ -69,7 +60,7 @@ void testProjection(){
     Vec3 point1(2);
     Vec3 point2(2,2,2);
     Vec3 point3(3);
-    Camera cam(point1, point2, 0.1,1000,4/3,90);
+    Camera cam(point1, point2, 0.1,1000,4/3,90,true);
     x3d d3(cam);
     points3d points({point1, point2, point3});
     points2d npoints = d3.projectPoints(points);
@@ -77,13 +68,13 @@ void testProjection(){
         cout << point << endl;
     }
 }
-
+/*
 void atRefTest(){
     matrix mat(0);
     mat.at(1,1) = 5;
     cout << mat;
 }
-
+*/
 void matrixDotTest(){
     matrix mat(2);
     mat=mat^2;
@@ -103,6 +94,7 @@ int testWm(){
     Color coolColor1(100,50,100);
     Color coolColor2(50,25,30);
     Rect2Component rect(Vec2(0), Vec2(50), coolColor1);
+    rect.rot = 5;
 
     while(wm.isRunning()) {
         wm.clear();
@@ -110,8 +102,6 @@ int testWm(){
         g.drawDebug();
 
         rect.tick(g, math);
-
-
         
         wm.loop();
         SDL_Delay(16);    // Cap to ~60 FPS

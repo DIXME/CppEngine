@@ -1,6 +1,19 @@
 # ninja log v6
-1825	2101	7695415300360743	MyExecutable.exe	c6208c90895bfaf4
-16	1824	7695415282267921	CMakeFiles/MyExecutable.dir/src/tests.cpp.obj	864b5a70ee0afb61
-2	136	7695416553517070	build.ninja	deef10f150a5b88b
-17	1853	7695416554376868	CMakeFiles/MyExecutable.dir/src/tests.cpp.obj	864b5a70ee0afb61
-1854	2136	7695416572749412	MyExecutable.exe	c6208c90895bfaf4
+18	498	7696257152116221	CMakeFiles/MyExecutable.dir/src/Color.cpp.obj	5877b89804a149b4
+16	800	7696285889699440	CMakeFiles/MyExecutable.dir/src/Matrix.cpp.obj	190992be429647f
+2	136	7696286840793006	build.ninja	deef10f150a5b88b
+20	1373	7696285142103481	CMakeFiles/MyExecutable.dir/src/Graphics.cpp.obj	2272b8e1afd926ac
+19	775	7696285889739705	CMakeFiles/MyExecutable.dir/src/X3D.cpp.obj	4697328d46dad8c5
+40	1143	7696285142300495	CMakeFiles/MyExecutable.dir/src/WindowManager.cpp.obj	cc8494229082ec05
+1676	1927	7695541865286945	MyExecutable.exe	c6208c90895bfaf4
+19	1661	7695554996093509	CMakeFiles/MyExecutable.dir/src/tests.cpp.obj	864b5a70ee0afb61
+16	861	7696285142065941	CMakeFiles/MyExecutable.dir/src/Camera.cpp.obj	27d409d1c9667d3c
+31	1395	7696285142212973	CMakeFiles/MyExecutable.dir/src/Rects.cpp.obj	2992c4167c08e183
+47	879	7695806159201862	CMakeFiles/MyExecutable.dir/src/Script..cpp.obj	27c1dfb0684fe4dc
+24	1285	7696285142136326	CMakeFiles/MyExecutable.dir/src/Keyboard.cpp.obj	20abacec16371660
+24	544	7695933457034945	CMakeFiles/MyExecutable.dir/src/Component.cpp.obj	cab19e3954d61901
+21	597	7696268670112045	CMakeFiles/MyExecutable.dir/src/Geometry.cpp.obj	55c154635fdce60d
+35	668	7696285142256791	CMakeFiles/MyExecutable.dir/src/Vectors.cpp.obj	8404172574d54171
+17	966	7696286841696649	CMakeFiles/MyExecutable.dir/src/Keyboard.cpp.obj	20abacec16371660
+21	1203	7696286841737150	CMakeFiles/MyExecutable.dir/src/tests.cpp.obj	864b5a70ee0afb61
+1203	1485	7696286853554917	MyExecutable.exe	b216b3dfd3bf0583

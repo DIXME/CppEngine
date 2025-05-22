@@ -1,17 +1,8 @@
 #pragma once
 
-#include<Vectors.hpp>
-#include<variant>
-#include<Matrix.hpp>
-#include<iostream>
-#include<vector>
 #include<Camera.hpp>
-#include<util.hpp>
-#include<x3dMath.hpp>
-#include<Types.hpp>
-
-using namespace std;
-using namespace xTypes;
+#include<Matrix.hpp>
+#include<Geometry.hpp>
 
 class x3d {
 public:
@@ -19,100 +10,23 @@ public:
     // you should craete an instance if rendering!
     Camera cam;
     matrix projectionMatrix;
-    x3d(Camera cam): cam(cam), projectionMatrix(cam.projectionMatrix(cam)){};
+    x3d(Camera cam);
 
-    static points3d translatePoints(points3d points, Vec3 to){
-        const Vec3 dist(to.invert());
-        for( Vec3& v : points ){
-            v += dist;
-        }
-        return points;
-    };
+    static points3d translatePoints(points3d points, Vec3 to);
 
-    points2d projectPoints(points3d points){
-        points2d output({});
-        for( Vec3 point : points ){
-            // point3d -> matrix    3d space -> 2d space (screen)
-            matrix mat(point, true);
-            matrix matrix_result = this->projectionMatrix * mat;
-            // matrix ->  point2d
-            // when we do this we leave the z & w value to rot
-            // mabey it is usefull for somthing
-            output.insert( output.begin(), utl::Vec2FromMt(matrix_result) );
-        };
-        return output;
-    };
+    points2d projectPoints(points3d points) const;
 
-    matrix rotationMatrix3dX(float rot) const {
-        return matrix(matrix_t{
-            { 1, 0, 0 },
-            { 0, (float)cos((float)rot),-(float)sin((float)rot) },
-            { 0, (float)sin((float)rot), (float)cos((float)rot) }
-        });
-    };
+    matrix rotationMatrix3dX(float rot) const;
 
-    matrix rotationMatrix3dY(float rot) const {
-        return matrix(matrix_t{
-            { (float)cos((float)rot), 0, (float)sin((float)rot) },
-            { 0, 1, 0 },
-            {-(float)sin((float)rot), 0, (float)cos((float)rot) }
-        });
-    }
+    matrix rotationMatrix3dY(float rot) const;
 
-    matrix rotationMatrix3dZ(float rot) const {
-        return matrix(matrix_t{
-            { (float)cos((float)rot),-(float)sin((float)rot), 0 },
-            { (float)sin((float)rot), (float)cos((float)rot), 0 },
-            { 0, 0, 1 }
-        });
-    }
+    matrix rotationMatrix3dZ(float rot) const;
 
-    matrix rotate3dXYZ(Vec3 rot, Vec3 pos) const {
-        // rotate one point
-        matrix mat(pos);
-        if(rot.z != 0){
-            mat = rotationMatrix3dZ(rot.z) * mat;
-        };
-        if(rot.y != 0){
-            mat = rotationMatrix3dY(rot.y) * mat;
-        };
-        if(rot.x != 0){
-            mat = rotationMatrix3dX(rot.z) * mat;
-        };
-        return mat;
-    };
+    matrix rotate3dXYZ(Vec3 rot, Vec3 pos) const;
 
-    points3d rotatePoints(Vec3 rot, points3d points){
-        // FIX: this dose not account for zeros so this can be optimizzed
-        // this dose not use any other functions beacuse this is ment for multiable rotations
-        // beacuse it only creates 3 matrices and dose not recreate them (it would if it where to use rotate3dXYZ)
-        if(rot==Vec3(0)) return points;
-        matrix z = rotationMatrix3dZ(rot.z);
-        matrix y = rotationMatrix3dY(rot.y);
-        matrix x = rotationMatrix3dX(rot.x);
-        for( Vec3& point: points ){
-            matrix mat(point);
-            if(rot.z!=0) mat = z * mat;
-            if(rot.y!=0) mat = y * mat;
-            if(rot.x!=0) mat = x * mat;
-            point = utl::Vec3FromMt(mat);
-        }
-        return points;
-    }
+    points3d rotatePoints(Vec3 rot, points3d points) const;
 
-    Vec2 rotate2(Vec2 point, float rot){
-        matrix mat = matrix_t{
-            {cos(rot),-sin(rot)},
-            {sin(rot), cos(rot)}
-        };
-        matrix pmt(point);
-        return utl::Vec2FromMt(pmt*mat);
-    }
+    Vec2 rotate2(Vec2 point, float rot) const;
     
-    points2d rotatePoints2(points2d points, float rot){
-        for( Vec2 point : points ){
-            point = this->rotate2(point, rot);
-        }
-        return points;
-    }
+    points2d rotatePoints2(points2d points, float rot) const;
 };
