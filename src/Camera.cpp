@@ -4,7 +4,6 @@
 #include<Geometry.hpp>
 #include <cmath>
 #include<Matrix.hpp>
-
     
 Camera::Camera(Vec3 pos, Vec3 rot, float near, float far, float aspect, int fov, bool isDeg):
 pos(pos),
@@ -15,7 +14,8 @@ near(near),
 far(far),
 aspect(aspect),
 fovDeg(isDeg ? fov : Math::radToDeg(fov)),
-fovRad(isDeg ? Math::degToRad(fov) : fov)
+fovRad(isDeg ? Math::degToRad(fov) : fov),
+Component(Root)
 {};
     
 Camera::Camera(bool isDeg):
@@ -27,7 +27,8 @@ near(0),
 far(0),
 aspect(4/3),
 fovDeg(isDeg ? 90 : Math::radToDeg(90)),
-fovRad(isDeg ? Math::degToRad(90) : 90)
+fovRad(isDeg ? Math::degToRad(90) : 90),
+Component(Root)
 {};
 
 matrix Camera::projectionMatrix(Camera cam){

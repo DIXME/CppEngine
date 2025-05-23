@@ -17,3 +17,8 @@ that will manage all of them so they can interact more efficently
 i am but i really like the launge everytime i learn more i like it even more then i did before
 but this dose brings some draw backs beacuse i was wrrting deffs in hpp files witch is NOT good
 so i have to rewrite hpp files & make src files now
+
+# game loop🥀
+i want games made with this to be able to run at a high frame rate but the frame rate dosent not affect the main game loop like timed things
+and mostly pysicys beacues that means velicotys like every objectes vel and the camera will be all messed up
+perhaps multi threading is the soultion?

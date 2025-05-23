@@ -102,8 +102,10 @@ int testWm(){
         g.drawDebug();
 
         rect.tick(g, math);
+        rect.rotVel+=1;
         
         wm.loop();
+        // main game loop should run @60 and the ainmation can be @ whatever tbh
         SDL_Delay(16);    // Cap to ~60 FPS
     }
 

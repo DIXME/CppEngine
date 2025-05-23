@@ -1,22 +1,32 @@
-#pragma once 
+#pragma once
 
 #include<vector>
+#include<variant>
+
+// eveything in the scene will be a component
 
 class Component {
-private:
-    std::vector<Component> Components;
-
 public:
-    Component();
+    RootComponent* Root;
+
+    std::vector<Component*> Components;
+
+    Component(RootComponent* Root);
     ~Component();
-
-    void componentsTick();
-
-    void tickComp(Component* parent);
     
-    // decendants should make ther component do whatevver it wants
-    // in its own void tick function that the scene would call however
-    // i can not put it here beacuse it might take diffrent args
+    void tick(std::variant<RootComponent*, Component*> Parent);
+    void tickComponents();
+};
 
-    void addComponent(Component* comp);
+class RootComponent {
+public:
+    std::vector<Component*> Components;
+
+    RootComponent();
+    ~RootComponent();
+    
+    // you would call this tick method in a game loop to
+    // render and make everything function
+    void tick();
+    void tickComponents();
 };

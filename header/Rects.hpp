@@ -13,7 +13,7 @@ public:
 
     rect2 rect();
 
-    void draw(Graphics g, x3d math);
+    void draw(Component* parent);
 
-    void tick(Graphics g, x3d math);
+    void tick(Component* parent);
 };

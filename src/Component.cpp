@@ -1,29 +1,42 @@
-#include<vector>
 #include<Component.hpp>
 
-Component::Component(){}
-Component::~Component(){}
+// if we get a parent then we are a root compenet else we are not
+Component::Component(RootComponent* Root): Root(Root){};
+Component::~Component() = default;
 
-void Component::componentsTick(){
-    for(Component& comp : this->Components){
-        // tick all comps & give them yourself
-        // so they can talk to eachother/interact
-        // shouldnt call unless this comp has its own comps
-        comp.tickComp(this);
+void Component::tick(std::variant<RootComponent*, Component*> Parent){
+    // is to be overidden by the child class
+    // just examples
+    if(std::holds_alternative<RootComponent*>(Parent)){
+        // so this is the case where the component
+        // is just the scene and this is not a sub-child
+    } else if(std::holds_alternative<Component*>(Parent)) {
+        // this is just if its a normal component
+        // the else if is unseccary beacuse it is the only other option
+        // but its just for readabilty or beacuse i think it looks nicer
     };
-}
+    // do somthing
+};
 
-void Component::tickComp(Component* parent){
-    this->componentsTick();
-    // desdents DONT overide this
-}
+void Component::tickComponents(){
+    // so basicly if we have any components we can call there ticks here 
+    // so the point is every component can have infinte compoentes
+    // example 3d cube has 2 script components and the script
+    for(Component* Comp : this->Components){
+        (*Comp).tick(this);
+    };
+};
 
-// decendants should make ther component do whatevver it wants
-// in its own void tick function that the scene would call however
-// i can not put it here beacuse it might take diffrent args
+RootComponent::RootComponent(){};
+RootComponent::~RootComponent() = default;
 
-void Component::addComponent(Component* comp){
-    // FIX: de refing pointers might not be a good
-    // idea i dont really know
-    this->Components.push_back((*comp));
+void RootComponent::tick(){};
+
+void RootComponent::tickComponents(){
+    // so basicly if we have any components we can call there ticks here 
+    // so the point is every component can have infinte compoentes
+    // example scene has 2 3d cubes
+    for(Component* Comp : this->Components){
+        (*Comp).tick(this);
+    };
 };

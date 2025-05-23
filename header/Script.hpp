@@ -3,7 +3,7 @@
 #include<Component.hpp>
 #include<functional>
 
-class ScriptComponent : Component {
+class ScriptComponent : public Component {
     std::function<void(Component* parent)> script;
 
     ScriptComponent();

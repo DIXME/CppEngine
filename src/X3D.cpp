@@ -85,9 +85,9 @@ points3d x3d::rotatePoints(Vec3 rot, points3d points) const {
     matrix x = rotationMatrix3dX(rot.x);
     for( Vec3& point: points ){
         matrix mat(point,false);
-        if(rot.z!=0) mat = z * mat;
-        if(rot.y!=0) mat = y * mat;
-        if(rot.x!=0) mat = x * mat;
+        if(rot.z!=0) mat = mat * z;
+        if(rot.y!=0) mat = mat * y;
+        if(rot.x!=0) mat = mat * z;
         point = Vec3(mat);
     }
     return points;
@@ -98,19 +98,14 @@ Vec2 x3d::rotate2(Vec2 point, float rot) const {
         {std::cos(rot),-std::sin(rot)},
         {std::sin(rot), std::cos(rot)}
     };
-    std::cout << "made rot" << std::endl;
     matrix pmt(point);
-    std::cout << "made mats" << std::endl;
-    std::cout << pmt << std::endl << mat << endl;
-    Vec2 result(pmt*mat);
+    Vec2 result(mat*pmt);
     return result;
 };
 
 points2d x3d::rotatePoints2(points2d points, float rot) const {
-    for( Vec2 point : points ){
-        std::cout << point;
+    for( Vec2& point : points ){
         point = this->rotate2(point, rot);
-        std::cout << point;
     }
     return points;
 };
