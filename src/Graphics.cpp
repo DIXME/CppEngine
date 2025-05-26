@@ -5,6 +5,7 @@
 #include<Geometry.hpp>
 #include<WindowManager.hpp>
 #include<Graphics.hpp>
+#include<Color.hpp>
 
 Graphics::Graphics(WindowManager& wm, Camera cam, x3d math): wm(wm), cam(cam), math(math){};
 Graphics::~Graphics() = default;
@@ -16,6 +17,12 @@ Vec2 Graphics::translate(Vec2 point){
 
 void Graphics::setColor(short int r, short int g, short int b, short int a){
     SDL_SetRenderDrawColor(this->wm.renderer, r, g, b, a);
+}
+
+void Graphics::setColor(Color color){
+    // FIX:
+    // FUCKING STUPID
+    SDL_SetRenderDrawColor(this->wm.renderer, color.get().r, color.get().g, color.get().b, color.get().a);
 }
 
 void Graphics::line(Vec2 a, Vec2 b){

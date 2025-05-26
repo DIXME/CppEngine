@@ -17,4 +17,7 @@ public:
 
     Scene(x3d math_i, Camera cam, Graphics g);
     ~Scene();
+
+    // no methods we just give the game objects ourselfs with there tick function
+    // from our inhertied tickComps function
 };

@@ -13,7 +13,8 @@ pos(pos),
 whv(whv),
 color(color),
 vel(Vec2(0,0)),
-rot(0.0)
+rot(0.0),
+Component(Root)
 {}
 
 Rect2Component::~Rect2Component(){}
@@ -22,13 +23,13 @@ rect2 Rect2Component::rect(){
     return rect2(this->pos, this->whv);
 }
 
-void Rect2Component::draw(Component* parent){
-    g.setColor(this->color.get().r, this->color.get().g, this->color.get().b, this->color.get().a);
-    (rot!=0)? g.connectPoints(math.rotatePoints2(this->rect().verts(), this->rot)) : g.connectPoints(this->rect().verts());
+void Rect2Component::draw(Scene* Parent){
+    (*Parent).g.setColor(this->color.get().r, this->color.get().g, this->color.get().b, this->color.get().a);
+    (rot!=0)? (*Parent).g.connectPoints((*Parent).math_i.rotatePoints2(this->rect().verts(), this->rot)) : (*Parent).g.connectPoints(this->rect().verts());
 }
 
-void Rect2Component::tick(Component* parent){
-    this->tickComp(this);
+void Rect2Component::tick(Scene* parent){
+    Component::tickComponents();
     this->pos += this->vel;
     this->rot += this->rotVel;
     this->vel *= Vec2(Constants::friction);

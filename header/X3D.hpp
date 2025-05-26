@@ -27,6 +27,6 @@ public:
     points3d rotatePoints(Vec3 rot, points3d points) const;
 
     Vec2 rotate2(Vec2 point, float rot) const;
-    
+
     points2d rotatePoints2(points2d points, float rot) const;
 };

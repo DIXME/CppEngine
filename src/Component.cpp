@@ -1,4 +1,5 @@
 #include<Component.hpp>
+#include<RootComponent.hpp>
 
 // if we get a parent then we are a root compenet else we are not
 Component::Component(RootComponent* Root): Root(Root){};
@@ -22,20 +23,6 @@ void Component::tickComponents(){
     // so basicly if we have any components we can call there ticks here 
     // so the point is every component can have infinte compoentes
     // example 3d cube has 2 script components and the script
-    for(Component* Comp : this->Components){
-        (*Comp).tick(this);
-    };
-};
-
-RootComponent::RootComponent(){};
-RootComponent::~RootComponent() = default;
-
-void RootComponent::tick(){};
-
-void RootComponent::tickComponents(){
-    // so basicly if we have any components we can call there ticks here 
-    // so the point is every component can have infinte compoentes
-    // example scene has 2 3d cubes
     for(Component* Comp : this->Components){
         (*Comp).tick(this);
     };

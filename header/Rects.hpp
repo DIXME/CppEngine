@@ -1,6 +1,11 @@
 #pragma once
 
-#include<Graphics.hpp>
+#include<Color.hpp>
+#include<Vectors.hpp>
+
+// takes scene beacuse it should only be given scene by the scene or somthing like a group component
+// forward declare here beacuse we only use a scene pointer
+class Scene;
 
 class Rect2Component : Component {
 public:
@@ -13,7 +18,6 @@ public:
 
     rect2 rect();
 
-    void draw(Component* parent);
-
-    void tick(Component* parent);
+    void draw(Scene* parent);
+    void tick(Scene* parent);
 };

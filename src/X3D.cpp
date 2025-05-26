@@ -85,9 +85,9 @@ points3d x3d::rotatePoints(Vec3 rot, points3d points) const {
     matrix x = rotationMatrix3dX(rot.x);
     for( Vec3& point: points ){
         matrix mat(point,false);
-        if(rot.z!=0) mat = mat * z;
-        if(rot.y!=0) mat = mat * y;
-        if(rot.x!=0) mat = mat * z;
+        if(rot.z!=0) mat = z*mat;
+        if(rot.y!=0) mat = y*mat;
+        if(rot.x!=0) mat = x*mat;
         point = Vec3(mat);
     }
     return points;

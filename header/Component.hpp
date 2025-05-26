@@ -2,8 +2,11 @@
 
 #include<vector>
 #include<variant>
+#include<RootComponent.hpp>
 
 // eveything in the scene will be a component
+// Beacuse everything is a pointer you have to defref it
+// FIX: is this an issue?
 
 class Component {
 public:
@@ -15,18 +18,5 @@ public:
     ~Component();
     
     void tick(std::variant<RootComponent*, Component*> Parent);
-    void tickComponents();
-};
-
-class RootComponent {
-public:
-    std::vector<Component*> Components;
-
-    RootComponent();
-    ~RootComponent();
-    
-    // you would call this tick method in a game loop to
-    // render and make everything function
-    void tick();
     void tickComponents();
 };
